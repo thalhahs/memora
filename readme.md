@@ -23,6 +23,6 @@ This project demonstrates clean flow management for a contact storage system.
 
 ![Add Contact Flowchart](flowchart.png)
 
-_(Other flowcharts like Edit, Delete, and Essentials can be added here in the future.)_
+_(Other flowcharts like Edit, Delete, and Essentials will be added here in the future.)_
 
 
