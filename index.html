@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Address Book</title>
-    </head>
-    <body>
-        <h1>Address Book</h1>
-        <script src="/index.js"></script>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Address Book</title>
+  </head>
+  <body>
+    <h1>Address Book</h1>
+    <script src="/index.js"></script>
+    <li id="contacts">
+    <script>
+      const container = document.getElementById("contacts");
+      contacts.forEach((item) => {
+        const el = document.createElement("p");
+        el.textContent = `${item.name} - ${item.email} - ${item.phone} - ${item.address}`;
+        container.appendChild(el);
+      });
+    </script>
+    </div>
+  </body>
 </html>

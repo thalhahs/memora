@@ -73,4 +73,4 @@ const contacts = [
     }
 ];
 
-console.log[contacts];
+console.log(contacts);
