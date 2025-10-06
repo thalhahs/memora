@@ -1,10 +1,8 @@
 # 📒 Address Book Application
 
-A simple and efficient **Address Book App** to manage contacts.  
-You can **add, edit, delete, and search** contacts with ease.  
+A simple and efficient **Address Book App** to manage contacts.
+You can **add, edit, delete, and search** contacts with ease.
 This project demonstrates clean flow management for a contact storage system.
-
----
 
 ## 🚀 Features
 
@@ -15,8 +13,6 @@ This project demonstrates clean flow management for a contact storage system.
 - ☁️ Sync with cloud/server (optional)
 - 💾 Local database storage
 
----
-
 ## 🗂 Flowcharts
 
 ### Add Contact
@@ -24,5 +20,3 @@ This project demonstrates clean flow management for a contact storage system.
 ![Add Contact Flowchart](/assets/flowchart.png)
 
 _(Other flowcharts like Edit, Delete, and Essentials will be added here in the future.)_
-
-
