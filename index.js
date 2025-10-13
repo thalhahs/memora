@@ -60,12 +60,10 @@ const contactsList = [
   },
 ];
 
-//Functions
-
-function showContacts() {
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i];
-    showContacts(contact);
+function showContacts(contacts) {
+  for (let index = 0; index < contacts.length; index++) {
+    const contact = contacts[index];
+    showContact(contact);
   }
 }
 
@@ -78,29 +76,12 @@ function showContact(contact) {
 }
 
 function searchContacts(contacts, keyword) {
-  const foundContacts = contacts.filter((contact) =>
+  return contacts.filter((contact) =>
     contact.fullName.toLowerCase().includes(keyword.toLowerCase())
   );
-  return foundContacts;
 }
 
-function addContact(contacts, newContact) {
-  contacts.push(newContact);
-}
-
-function editContact(contacts, id, updatedContact) {
-  const index = contacts.findIndex((contact) => contact.id === id);
-  contacts[index] = updatedContact;
-}
-
-function deleteContact(contacts, id) {
-  const index = contacts.findIndex((contact) => contact.id === id);
-  contacts.splice(index, 1);
-}
+// showContacts(contactsList);
 
 const searchResults = searchContacts(contactsList, "thalhah");
 showContacts(searchResults);
-
-
-
-
