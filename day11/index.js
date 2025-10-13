@@ -27,6 +27,7 @@ showAnimalInfo(sampleAnimal);
  * @param {number} b
  * @returns {number} the sum of a and b
  */
+
 const addNumbers = (a, b) => a + b;
 
 console.log("1 + 2 =", addNumbers(1, 2));
