@@ -84,6 +84,23 @@ function searchContacts(contacts, keyword) {
   return foundContacts;
 }
 
+function addContact(contacts, newContact) {
+  contacts.push(newContact);
+}
+
+function editContact(contacts, id, updatedContact) {
+  const index = contacts.findIndex((contact) => contact.id === id);
+  contacts[index] = updatedContact;
+}
+
+function deleteContact(contacts, id) {
+  const index = contacts.findIndex((contact) => contact.id === id);
+  contacts.splice(index, 1);
+}
+
+const searchResults = searchContacts(contactsList, "thalhah");
+showContacts(searchResults);
+
 
 
 
