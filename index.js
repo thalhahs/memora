@@ -81,6 +81,11 @@ function searchContacts(contacts, keyword) {
   );
 }
 
+function addContact() {}
+
+function deleteContact() {}
+
+function editContact() {}
 
 const searchResults = searchContacts(contactsList, "thalhah");
 showContacts(searchResults);
