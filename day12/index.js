@@ -1,6 +1,5 @@
 console.log("📒 Memora — Batch 10");
 
-// ======= Contacts =======
 const contactsList = [
   {
     id: 1,
@@ -61,55 +60,19 @@ const contactsList = [
   },
 ];
 
-// ======= Functions =======
+//Functions 
 
-/**
- * Show all contacts
- * @param {Array} contacts - list of contact objects
- * @param {boolean} showAddress - show full address info if true
- */
-const showContacts = (contacts, showAddress = false) => {
-  console.log("\n========== CONTACT LIST ==========");
-  contacts.forEach((contact) => showContact(contact, showAddress));
-  console.log("=================================\n");
-};
-
-/**
- * Show a single contact's basic info
- * @param {Object} contact
- * @param {boolean} showAddress
- */
-const showContact = (contact, showAddress = false) => {
-  console.log(`
-👤 ${contact.fullName}
-📞 ${contact.phone}
-📧 ${contact.email}
-  `);
-
-  if (showAddress && contact.address) {
-    const a = contact.address;
-    console.log(`🏠 ${a.street}, ${a.city}, ${a.country}`);
+function showContacts() {
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i];
+    showContacts(contact);
   }
-};
+}
 
-/**
- * Search contacts by keyword
- * @param {Array} contacts
- * @param {string} keyword
- * @returns {Array}
- */
-const searchContacts = (contacts, keyword) => {
-  return contacts.filter((c) =>
-    c.fullName.toLowerCase().includes(keyword.toLowerCase())
-  );
-};
-
-// Future features
-const addContact = (contacts, newContact) => [...contacts, newContact];
-const deleteContact = (contacts, id) => contacts.filter((c) => c.id !== id);
-const editContact = (contacts, id, updatedData) =>
-  contacts.map((c) => (c.id === id ? { ...c, ...updatedData } : c));
-
-// ======= Example Usage =======
-const results = searchContacts(contactsList, "thalhah");
-showContacts(results, true);
+function showContact(contact) {
+  console.log(`
+    🙎🏻‍♂️ ${contact.fullName}
+    📞 ${contact.phone}
+    📧 ${contact.email}
+    `);
+  }
