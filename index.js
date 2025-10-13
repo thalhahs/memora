@@ -76,3 +76,14 @@ function showContact(contact) {
     📧 ${contact.email}
     `);
 }
+
+function searchContacts(contacts, keyword) {
+  const foundContacts = contacts.filter((contact) =>
+    contact.fullName.toLowerCase().includes(keyword.toLowerCase())
+  );
+  return foundContacts;
+}
+
+
+
+
