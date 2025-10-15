@@ -82,18 +82,15 @@ function searchContacts(contacts, keyword) {
   );
 }
 
-function addContact(fullName = "No Name", phone = "+621212121212", email = "noname@gmail.com"){
+function addContact(fullName = "No Name", phone = null, email = null){
   const newContact = {
     fullName: fullName,
     phone: phone,
     email: email,
-  }
+  };
 
-  console.log(newContact)
-};
-
-
-
+  console.log(newContact);
+}
 
 
 const searchResults = searchContacts(contactsList, "thalhah");
