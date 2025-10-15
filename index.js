@@ -93,5 +93,7 @@ function addContact(fullName = "No Name", phone = null, email = null){
 }
 
 
-const searchResults = searchContacts(contactsList, "thalhah");
-showContacts(searchResults);
+  //const searchResults = searchContacts(contactsList, "thalhah");
+  //showContacts(searchResults);
+
+  addContact("Grandhist", "+621398719273", "grand@gmail.com")
