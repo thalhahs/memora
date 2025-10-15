@@ -1,6 +1,6 @@
 console.log("📒 Memora");
 
-const contactsList = [
+let contactsList = [
   {
     id: 1,
     fullName: "Thalhah Shafiyurrahman",
@@ -61,13 +61,14 @@ const contactsList = [
 ];
 
 function showContacts(contacts) {
-  for (let index = 0; index < contacts.length; index++) {
-    const contact = contacts[index];
-    showContact(contact);
-  }
+  contacts.forEach((contact) => renderContact(contact))
 }
 
-function showContact(contact) {
+function renderSeparatorLine() {
+  console.log("-----------------------------------")
+}
+
+function renderContact(contact) {
   console.log(`
     🙎🏻‍♂️ ${contact.fullName}
     📞 ${contact.phone}
@@ -90,6 +91,8 @@ function addContact(fullName = "No Name", phone = "+621212121212", email = "nona
 
   console.log(newContact)
 };
+
+
 
 
 
