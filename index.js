@@ -113,6 +113,9 @@ function deleteContact (contacts, id) {
   contactsList = updatedContacts;
 }
  
+function editContact() {
+
+}
 
   //const searchResults = searchContacts(contactsList, "thalhah");
   //showContacts(searchResults);
