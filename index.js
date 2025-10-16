@@ -94,26 +94,29 @@ function addContact(
 
   const newId = contacts[contacts.length - 1].id + 1;
 
-  const newContacts = {
+  const newContact = {
     id: newId,
     fullName: fullName,
     phone: phone,
     email: email,
   };
 
-  const updatedContacts = [...contacts, newContacts];
+  const updatedContacts = [...contacts, newContact];
 
   contactsList = updatedContacts;
 }
 
-function deleteContact() {}
 
-function editContact() {}
+function deleteContact (contacts, id) {
+  const updatedContacts = contacts.filter((contact) => contact.id !== id);
 
+  contactsList = updatedContacts;
+}
+ 
 
   //const searchResults = searchContacts(contactsList, "thalhah");
   //showContacts(searchResults);
 
-  addContact(contactsList, "Grandhist", "+621398719273", "grand@gmail.com")
+  // addContact(contactsList, "Grandhist", "+621398719273", "grand@gmail.com")
 
-  showContacts(contactsList);
+  deleteContact(contactsList, 10);
