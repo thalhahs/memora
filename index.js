@@ -2,7 +2,7 @@ console.log("📒 Memora");
 
 let contactsList = [
   {
-    id: 1,
+    id: 10,
     fullName: "Thalhah Shafiyurrahman",
     phone: "+62-812-9000-1234",
     email: "thalhah@gmail.com",
@@ -21,7 +21,7 @@ let contactsList = [
     },
   },
   {
-    id: 2,
+    id: 20,
     fullName: "Aisha Rahman",
     phone: "+44-7788-345-221",
     email: "aisha.rahman@outlook.com",
@@ -40,7 +40,7 @@ let contactsList = [
     },
   },
   {
-    id: 3,
+    id: 150,
     fullName: "Kenji Nakamura",
     phone: "+81-90-1234-5678",
     email: "kenji.naka@jmail.jp",
@@ -77,23 +77,43 @@ function renderContact(contact) {
 }
 
 function searchContacts(contacts, keyword) {
-  return contacts.filter((contact) =>
+  const foundContacts =  contacts.filter((contact) =>
     contact.fullName.toLowerCase().includes(keyword.toLowerCase())
   );
+  return foundContacts;
 }
 
-function addContact(fullName = "No Name", phone = null, email = null){
-  const newContact = {
+
+
+function addContact(
+  contacts,
+  fullName = "No Name",
+  phone = null,
+  email = null,
+) {
+
+  const newId = contacts[contacts.length - 1].id + 1;
+
+  const newContacts = {
+    id: newId,
     fullName: fullName,
     phone: phone,
     email: email,
   };
 
-  console.log(newContact);
+  const updatedContacts = [...contacts, newContacts];
+
+  contactsList = updatedContacts;
 }
+
+function deleteContact() {}
+
+function editContact() {}
 
 
   //const searchResults = searchContacts(contactsList, "thalhah");
   //showContacts(searchResults);
 
-  addContact("Grandhist", "+621398719273", "grand@gmail.com")
+  addContact(contactsList, "Grandhist", "+621398719273", "grand@gmail.com")
+
+  showContacts(contactsList);
