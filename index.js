@@ -110,37 +110,15 @@ function deleteContact(contacts, id) {
 }
 
 function editContact(contacts, id, updatedData) {
-  // untuk mengingat alur
-
-  // cari index contacts dengan Id
-  const contactIndex = contacts.findIndex((contact) => contact.id === id);
-
-  // kalau null, show pesan
-  if (contactIndex === -1) {
-    console.log(`❌ Contact with id ${id} not found.`);
-    return;
-  }
-
-  // merge data
-  const updatedContact = {
-    ...contacts[contactIndex],
-    ...updatedData,
-  };
-
-  // buat array baru dengan updatedContacts
-  const updatedContacts = [
-    ...contacts.slice(0, contactIndex),
-    updatedContact,
-    ...contacts.slice(contactIndex + 1),
-  ];
+  // TODO: Implement again
 
   contactsList = updatedContacts;
 
   console.log(`✅ Contact "${updatedContact.fullName}" successfully updated.`);
 }
 
-//const searchResults = searchContacts(contactsList, "thalhah");
-//showContacts(searchResults);
+// const searchResults = searchContacts(contactsList, "thalhah");
+// showContacts(searchResults);
 
 // addContact(contactsList, "Grandhist", "+621398719273", "grand@gmail.com")
 
