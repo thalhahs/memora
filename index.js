@@ -61,11 +61,11 @@ let contactsList = [
 ];
 
 function showContacts(contacts) {
-  contacts.forEach((contact) => renderContact(contact))
+  contacts.forEach((contact) => renderContact(contact));
 }
 
 function renderSeparatorLine() {
-  console.log("-----------------------------------")
+  console.log("-----------------------------------");
 }
 
 function renderContact(contact) {
@@ -77,21 +77,18 @@ function renderContact(contact) {
 }
 
 function searchContacts(contacts, keyword) {
-  const foundContacts =  contacts.filter((contact) =>
+  const foundContacts = contacts.filter((contact) =>
     contact.fullName.toLowerCase().includes(keyword.toLowerCase())
   );
   return foundContacts;
 }
 
-
-
 function addContact(
   contacts,
   fullName = "No Name",
   phone = null,
-  email = null,
+  email = null
 ) {
-
   const newId = contacts[contacts.length - 1].id + 1;
 
   const newContact = {
@@ -106,20 +103,47 @@ function addContact(
   contactsList = updatedContacts;
 }
 
-
-function deleteContact (contacts, id) {
+function deleteContact(contacts, id) {
   const updatedContacts = contacts.filter((contact) => contact.id !== id);
 
   contactsList = updatedContacts;
 }
- 
-function editContact() {
 
+function editContact(contacts, id, updatedData) {
+  // untuk mengingat alur
+
+  // cari index contacts dengan Id
+  const contactIndex = contacts.findIndex((contact) => contact.id === id);
+
+  // kalau null, show pesan
+  if (contactIndex === -1) {
+    console.log(`❌ Contact with id ${id} not found.`);
+    return;
+  }
+
+  // merge data
+  const updatedContact = {
+    ...contacts[contactIndex],
+    ...updatedData,
+  };
+
+  // buat array baru dengan updatedContacts
+  const updatedContacts = [
+    ...contacts.slice(0, contactIndex),
+    updatedContact,
+    ...contacts.slice(contactIndex + 1),
+  ];
+
+  contactsList = updatedContacts;
+
+  console.log(`✅ Contact "${updatedContact.fullName}" successfully updated.`);
 }
 
-  //const searchResults = searchContacts(contactsList, "thalhah");
-  //showContacts(searchResults);
+//const searchResults = searchContacts(contactsList, "thalhah");
+//showContacts(searchResults);
 
-  // addContact(contactsList, "Grandhist", "+621398719273", "grand@gmail.com")
+// addContact(contactsList, "Grandhist", "+621398719273", "grand@gmail.com")
 
-  deleteContact(contactsList, 10);
+deleteContact(contactsList, 10);
+
+console.log(contactsList);
