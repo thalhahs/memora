@@ -84,7 +84,7 @@ function searchContacts(contacts, keyword) {
 // ✅ Fungsi addContact yang sudah dilengkapi
 function addContact(contacts, { fullName = "-", phone = "-", email = "-" }) {
   const newId = contacts.at(-1)?.id + 1 || 1;
-  const newContact = { id: newId, fullName, phone, email };
+  const newCntact = { id: newId, fullName, phone, email };
   const updatedContacts = [...contacts, newContact];
   contactsList = updatedContacts;
   renderContacts(contactsList);
@@ -121,5 +121,4 @@ renderContacts(contactsList);
 // addContact(contactsList, { fullName: "Grandhist", phone: "+62-139-871-9273", email: "grand@gmail.com" });
 // deleteContact(contactsList, 20);
 // editContact(contactsList, 150, { phone: "+81-90-9999-0000" });
-// const result = searchContacts(contactsList, "thalhah");
-// console.log(result);
+// console.log(contactsList);
