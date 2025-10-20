@@ -60,90 +60,66 @@ let contactsList = [
   },
 ];
 
-function showContacts(contacts) {
-  contacts.forEach((contact) => renderContact(contact));
-}
-
-function renderSeparatorLine() {
-  console.log("-----------------------------------");
+function renderContacts(contacts) {
+  const appElement = document.getElementById("app");
+  appElement.innerHTML = `<ul id="contacts" class="space-y-4">
+    ${contacts.map(renderContact).join("")}
+  </ul>`;
 }
 
 function renderContact(contact) {
-  console.log(`
-    🙎🏻‍♂️ ${contact.fullName}
-    📞 ${contact.phone}
-    📧 ${contact.email}
-    `);
+  return `<li class="p-2 border border-black rounded">
+    <h2 class="font-bold text-lg">👤 ${contact.fullName}</h2>
+    <p>📞 ${contact.phone ?? "-"}</p>
+    <p>📧 ${contact.email ?? "-"}</p>
+  </li>`;
 }
 
 function searchContacts(contacts, keyword) {
-  const foundContacts = contacts.filter((contact) =>
-    contact.fullName.toLowerCase().includes(keyword.toLowerCase())
+  return contacts.filter((c) =>
+    c.fullName.toLowerCase().includes(keyword.toLowerCase())
   );
-  return foundContacts;
 }
 
-function addContact(
-  contacts,
-  fullName = "No Name",
-  phone = null,
-  email = null
-) {
-  const newId = contacts[contacts.length - 1].id + 1;
-
-  const newContact = {
-    id: newId,
-    fullName: fullName,
-    phone: phone,
-    email: email,
-  };
-
+// ✅ Fungsi addContact yang sudah dilengkapi
+function addContact(contacts, { fullName = "-", phone = "-", email = "-" }) {
+  const newId = contacts.at(-1)?.id + 1 || 1;
+  const newContact = { id: newId, fullName, phone, email };
   const updatedContacts = [...contacts, newContact];
-
   contactsList = updatedContacts;
+  renderContacts(contactsList);
+  console.log("✅ Contact added:", newContact);
 }
 
+// ✅ Fungsi deleteContact yang simple dan konsisten
 function deleteContact(contacts, id) {
-  const updatedContacts = contacts.filter((contact) => contact.id !== id);
-
-  contactsList = updatedContacts;
+  contactsList = contacts.filter((c) => c.id !== id);
+  renderContacts(contactsList);
+  console.log(`🗑️ Contact with id ${id} deleted.`);
 }
 
-function editContact(contacts, id, updatedData) {
-  // untuk mengingat alur
-
-  // cari index contacts dengan Id
-  const contactIndex = contacts.findIndex((contact) => contact.id === id);
-
-  // kalau null, show pesan
-  if (contactIndex === -1) {
-    console.log(`❌ Contact with id ${id} not found.`);
-    return;
-  }
-
-  // merge data
-  const updatedContact = {
-    ...contacts[contactIndex],
-    ...updatedData,
-  };
-
-  // buat array baru dengan updatedContacts
-  const updatedContacts = [
-    ...contacts.slice(0, contactIndex),
-    updatedContact,
-    ...contacts.slice(contactIndex + 1),
-  ];
-
-  contactsList = updatedContacts;
-
-  console.log(`✅ Contact "${updatedContact.fullName}" successfully updated.`);
+// ✅ Fungsi editContact tetap sama
+function editContact(contacts, id, { fullName, phone, email }) {
+  contactsList = contacts.map((c) =>
+    c.id === id
+      ? {
+          ...c,
+          fullName: fullName ?? c.fullName,
+          phone: phone ?? c.phone,
+          email: email ?? c.email,
+        }
+      : c
+  );
+  renderContacts(contactsList);
+  console.log(`✏️ Contact with id ${id} updated.`);
 }
 
-//const searchResults = searchContacts(contactsList, "thalhah");
-//showContacts(searchResults);
+// ----------------------------------------------------------
 
-// addContact(contactsList, "Grandhist", "+621398719273", "grand@gmail.com")
+renderContacts(contactsList);
 
-deleteContact(contactsList, 10);
-
-console.log(contactsList);
+// addContact(contactsList, { fullName: "Grandhist", phone: "+62-139-871-9273", email: "grand@gmail.com" });
+// deleteContact(contactsList, 20);
+// editContact(contactsList, 150, { phone: "+81-90-9999-0000" });
+// const result = searchContacts(contactsList, "thalhah");
+// console.log(result);
