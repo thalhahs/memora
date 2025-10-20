@@ -1,5 +1,3 @@
-console.log("📒 Memora");
-
 let contactsList = [
   {
     id: 10,
@@ -76,50 +74,41 @@ function renderContact(contact) {
 }
 
 function searchContacts(contacts, keyword) {
-  return contacts.filter((c) =>
-    c.fullName.toLowerCase().includes(keyword.toLowerCase())
+  return contacts.filter((contact) =>
+    contact.fullName.toLowerCase().includes(keyword.toLowerCase())
   );
 }
 
-// ✅ Fungsi addContact yang sudah dilengkapi
-function addContact(contacts, { fullName = "-", phone = "-", email = "-" }) {
+function addContact(
+  contacts,
+  { fullName = "No Name", phone = null, email = null }
+) {
   const newId = contacts.at(-1)?.id + 1 || 1;
   const newContact = { id: newId, fullName, phone, email };
   const updatedContacts = [...contacts, newContact];
   contactsList = updatedContacts;
   renderContacts(contactsList);
-  console.log("✅ Contact added:", newContact);
 }
 
-// ✅ Fungsi deleteContact yang simple dan konsisten
 function deleteContact(contacts, id) {
   contactsList = contacts.filter((c) => c.id !== id);
   renderContacts(contactsList);
-  console.log(`🗑️ Contact with id ${id} deleted.`);
 }
 
-// ✅ Fungsi editContact tetap sama
 function editContact(contacts, id, { fullName, phone, email }) {
-  contactsList = contacts.map((c) =>
-    c.id === id
+  contactsList = contacts.map((contact) =>
+    contact.id === id
       ? {
-          ...c,
-          fullName: fullName ?? c.fullName,
-          phone: phone ?? c.phone,
-          email: email ?? c.email,
+          ...contact,
+          fullName: fullName ?? contact.fullName,
+          phone: phone ?? contact.phone,
+          email: email ?? contact.email,
         }
-      : c
+      : contact
   );
   renderContacts(contactsList);
-  console.log(`✏️ Contact with id ${id} updated.`);
 }
 
 // ----------------------------------------------------------
 
 renderContacts(contactsList);
-
-// addContact(contactsList, { fullName: "Grandhist", phone: "+62-139-871-9273", email: "grand@gmail.com" });
-// deleteContact(contactsList, 20);
-// editContact(contactsList, 150, { phone: "+81-90-9999-0000" });
-// const result = searchContacts(contactsList, "thalhah");
-// console.log(result);
