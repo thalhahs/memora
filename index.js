@@ -61,10 +61,14 @@ let contactsList = [
 ];
 
 function renderContacts(contacts) {
-  const appElement = document.getElementById("app");
-  appElement.innerHTML = `<ul id="contacts" class="space-y-4">
-    ${contacts.map(renderContact).join("")}
-  </ul>`;
+  const q = new URLSearchParams(window.location.search).get("q");
+  document.getElementById("q").value = q || "";
+
+  const list = q ? searchContacts(contacts, q) : contacts;
+  document.getElementById("app").innerHTML = `
+    <ul id="contacts" class="space-y-4">
+      ${list.map(renderContact).join("")}
+    </ul>`;
 }
 
 function renderContact(contact) {
