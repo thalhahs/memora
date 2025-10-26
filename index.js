@@ -71,56 +71,56 @@ function renderContacts(contacts) {
     </ul>`;
 }
 
-function renderContact(contact) {
-  return `<li class="p-2 border border-black rounded">
-    <h2 class="font-bold text-lg">👤 ${contact.fullName}</h2>
-    <p>📞 ${contact.phone ?? "-"}</p>
-    <p>📧 ${contact.email ?? "-"}</p>
-  </li>`;
+function renderContact({ id, fullName, phone, email }) {
+  return `
+    <li class="p-2 border border-black rounded flex justify-between">
+      <div>
+        <h2 class="font-bold text-lg">👤 ${fullName}</h2>
+        <p>📞 ${phone ?? "-"}</p>
+        <p>📧 ${email ?? "-"}</p>
+      </div>
+      <button 
+        onclick="deleteContact(dataContacts, ${id})"
+        class="bg-red-700 text-white text-xs px-1 py-0.5 rounded">
+        Delete
+      </button>
+    </li>`;
+}
+
+function deleteContact(contacts, id) {
+  dataContacts = contacts.filter(c => c.id !== id);
+  renderContacts(dataContacts);
 }
 
 function searchContacts(contacts, keyword) {
-  return contacts.filter((c) =>
-    c.fullName.toLowerCase().includes(keyword.toLowerCase())
-  );
+  keyword = keyword.toLowerCase();
+  return contacts.filter(c => c.fullName.toLowerCase().includes(keyword));
 }
 
-// ✅ Fungsi addContact yang sudah dilengkapi
-function addContact(contacts, { fullName = "-", phone = "-", email = "-" }) {
+function addContact(contacts, contactData) {
   const newId = contacts.at(-1)?.id + 1 || 1;
-  const newCntact = { id: newId, fullName, phone, email };
-  const updatedContacts = [...contacts, newContact];
-  contactsList = updatedContacts;
-  renderContacts(contactsList);
-  console.log("✅ Contact added:", newContact);
+  const newContact = { id: newId, ...contactData };
+  dataContacts = [...contacts, newContact];
+  renderContacts(dataContacts);
 }
 
-// ✅ Fungsi deleteContact yang simple dan konsisten
-function deleteContact(contacts, id) {
-  contactsList = contacts.filter((c) => c.id !== id);
-  renderContacts(contactsList);
-  console.log(`🗑️ Contact with id ${id} deleted.`);
-}
-
-// ✅ Fungsi editContact tetap sama
-function editContact(contacts, id, { fullName, phone, email }) {
-  contactsList = contacts.map((c) =>
-    c.id === id
-      ? {
-          ...c,
-          fullName: fullName ?? c.fullName,
-          phone: phone ?? c.phone,
-          email: email ?? c.email,
-        }
-      : c
+function editContact(contacts, id, updates) {
+  dataContacts = contacts.map(c => 
+    c.id === id ? { ...c, ...Object.fromEntries(Object.entries(updates).filter(([_, v]) => v)) } : c
   );
-  renderContacts(contactsList);
-  console.log(`✏️ Contact with id ${id} updated.`);
 }
 
-// ----------------------------------------------------------
+// ------------------------------------------------------------------
 
-renderContacts(contactsList);
+const addContactFormElement = document.getElementById("add-contact-form");
+
+addContactFormElement.addEventListener("submit", e => {
+  e.preventDefault();
+  const formData = Object.fromEntries(new FormData(addContactFormElement).entries());
+  addContact(dataContacts, formData);
+});
+
+renderContacts(dataContacts);
 
 // addContact(contactsList, { fullName: "Grandhist", phone: "+62-139-871-9273", email: "grand@gmail.com" });
 // deleteContact(contactsList, 20);
