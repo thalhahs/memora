@@ -15,13 +15,16 @@
 
     <!-- Search -->
     <div class="w-full max-w-md mb-6">
-      <input
-        id="q"
-        type="text"
-        placeholder="🔍 Search contacts..."
-        class="border rounded-md p-2 w-full"
-        oninput="handleSearch(event)"
-      />
+      <form id="search-form" method="get">
+        <label for="q" class="hidden">Search</label>
+        <input
+          id="q"
+          name="q"
+          type="search"
+          placeholder="🔍 Search contacts..."
+          class="border rounded-md p-2 w-full"
+        />
+      </form>
     </div>
 
     <!-- Form -->

@@ -61,13 +61,18 @@ let contactsList = [
 ];
 
 function renderContacts(contacts) {
-  const listHTML = contacts.length
-    ? contacts.map(renderContact).join("")
-    : "<p class='text-center text-gray-500'>No contacts found.</p>";
+  // TODO: Implement logic to get search query
+  // use filteredContacts variable
+
+  const hasContacts = contacts.length > 0;
 
   document.getElementById("app").innerHTML = `
     <ul id="contacts" class="space-y-4">
-      ${listHTML}
+      ${
+        hasContacts
+          ? contacts.map(renderContact).join("")
+          : "<p class='text-center text-gray-500'>No contacts found.</p>"
+      }
     </ul>`;
 }
 
@@ -88,16 +93,8 @@ function renderContact({ id, fullName, phone, email }) {
 }
 
 function deleteContact(id) {
-  contactsList = contactsList.filter(c => c.id !== id);
+  contactsList = contactsList.filter((c) => c.id !== id);
   renderContacts(contactsList);
-}
-
-function handleSearch(event) {
-  const keyword = event.target.value.toLowerCase();
-  const filtered = contactsList.filter(c =>
-    c.fullName.toLowerCase().includes(keyword)
-  );
-  renderContacts(filtered);
 }
 
 function addContact(contacts, contactData) {
@@ -109,17 +106,15 @@ function addContact(contacts, contactData) {
 
 const addContactFormElement = document.getElementById("add-contact-form");
 
-addContactFormElement.addEventListener("submit", e => {
+addContactFormElement.addEventListener("submit", (e) => {
   e.preventDefault();
-  const formData = Object.fromEntries(new FormData(addContactFormElement).entries());
+  const formData = Object.fromEntries(
+    new FormData(addContactFormElement).entries()
+  );
   addContact(contactsList, formData);
   addContactFormElement.reset();
 });
 
 renderContacts(contactsList);
 
-
-// addContact(contactsList, { fullName: "Grandhist", phone: "+62-139-871-9273", email: "grand@gmail.com" });
-// deleteContact(contactsList, 20);
-// editContact(contactsList, 150, { phone: "+81-90-9999-0000" });
-// console.log(contactsList);
+// TODO: Edit?
