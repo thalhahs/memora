@@ -61,13 +61,13 @@ let contactsList = [
 ];
 
 function renderContacts(contacts) {
-  const q = new URLSearchParams(window.location.search).get("q");
-  document.getElementById("q").value = q || "";
-
+  const qInput = document.getElementById("q");
+  const q = qInput ? qInput.value.toLowerCase() : "";
   const list = q ? searchContacts(contacts, q) : contacts;
+
   document.getElementById("app").innerHTML = `
     <ul id="contacts" class="space-y-4">
-      ${list.map(renderContact).join("")}
+      ${list.map(renderContact).join("") || "<p>No contacts found.</p>"}
     </ul>`;
 }
 
@@ -80,20 +80,19 @@ function renderContact({ id, fullName, phone, email }) {
         <p>📧 ${email ?? "-"}</p>
       </div>
       <button 
-        onclick="deleteContact(contactsList, ${id})"
+        onclick="deleteContact(${id})"
         class="bg-red-700 text-white text-xs px-1 py-0.5 rounded">
         Delete
       </button>
     </li>`;
 }
 
-function deleteContact(contacts, id) {
-  contactsList = contacts.filter(c => c.id !== id);
+function deleteContact(id) {
+  contactsList = contactsList.filter(c => c.id !== id);
   renderContacts(contactsList);
 }
 
 function searchContacts(contacts, keyword) {
-  keyword = keyword.toLowerCase();
   return contacts.filter(c => c.fullName.toLowerCase().includes(keyword));
 }
 
@@ -104,23 +103,17 @@ function addContact(contacts, contactData) {
   renderContacts(contactsList);
 }
 
-function editContact(contacts, id, updates) {
-  contactsList = contacts.map(c => 
-    c.id === id ? { ...c, ...Object.fromEntries(Object.entries(updates).filter(([_, v]) => v)) } : c
-  );
-}
-
-// ------------------------------------------------------------------
-
 const addContactFormElement = document.getElementById("add-contact-form");
 
 addContactFormElement.addEventListener("submit", e => {
   e.preventDefault();
   const formData = Object.fromEntries(new FormData(addContactFormElement).entries());
   addContact(contactsList, formData);
+  addContactFormElement.reset();
 });
 
 renderContacts(contactsList);
+
 
 // addContact(contactsList, { fullName: "Grandhist", phone: "+62-139-871-9273", email: "grand@gmail.com" });
 // deleteContact(contactsList, 20);
