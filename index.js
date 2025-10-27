@@ -80,7 +80,7 @@ function renderContact({ id, fullName, phone, email }) {
         <p>📧 ${email ?? "-"}</p>
       </div>
       <button 
-        onclick="deleteContact(dataContacts, ${id})"
+        onclick="deleteContact(contactsList, ${id})"
         class="bg-red-700 text-white text-xs px-1 py-0.5 rounded">
         Delete
       </button>
@@ -88,8 +88,8 @@ function renderContact({ id, fullName, phone, email }) {
 }
 
 function deleteContact(contacts, id) {
-  dataContacts = contacts.filter(c => c.id !== id);
-  renderContacts(dataContacts);
+  contactsList = contacts.filter(c => c.id !== id);
+  renderContacts(contactsList);
 }
 
 function searchContacts(contacts, keyword) {
@@ -100,12 +100,12 @@ function searchContacts(contacts, keyword) {
 function addContact(contacts, contactData) {
   const newId = contacts.at(-1)?.id + 1 || 1;
   const newContact = { id: newId, ...contactData };
-  dataContacts = [...contacts, newContact];
-  renderContacts(dataContacts);
+  contactsList = [...contacts, newContact];
+  renderContacts(contactsList);
 }
 
 function editContact(contacts, id, updates) {
-  dataContacts = contacts.map(c => 
+  contactsList = contacts.map(c => 
     c.id === id ? { ...c, ...Object.fromEntries(Object.entries(updates).filter(([_, v]) => v)) } : c
   );
 }
@@ -117,10 +117,10 @@ const addContactFormElement = document.getElementById("add-contact-form");
 addContactFormElement.addEventListener("submit", e => {
   e.preventDefault();
   const formData = Object.fromEntries(new FormData(addContactFormElement).entries());
-  addContact(dataContacts, formData);
+  addContact(contactsList, formData);
 });
 
-renderContacts(dataContacts);
+renderContacts(contactsList);
 
 // addContact(contactsList, { fullName: "Grandhist", phone: "+62-139-871-9273", email: "grand@gmail.com" });
 // deleteContact(contactsList, 20);
