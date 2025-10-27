@@ -61,27 +61,27 @@ let contactsList = [
 ];
 
 function renderContacts(contacts) {
-  const qInput = document.getElementById("q");
-  const q = qInput ? qInput.value.toLowerCase() : "";
-  const list = q ? searchContacts(contacts, q) : contacts;
+  const listHTML = contacts.length
+    ? contacts.map(renderContact).join("")
+    : "<p class='text-center text-gray-500'>No contacts found.</p>";
 
   document.getElementById("app").innerHTML = `
     <ul id="contacts" class="space-y-4">
-      ${list.map(renderContact).join("") || "<p>No contacts found.</p>"}
+      ${listHTML}
     </ul>`;
 }
 
 function renderContact({ id, fullName, phone, email }) {
   return `
-    <li class="p-2 border border-black rounded flex justify-between">
+    <li class="p-3 border border-gray-400 rounded-lg flex justify-between items-center bg-white">
       <div>
         <h2 class="font-bold text-lg">👤 ${fullName}</h2>
-        <p>📞 ${phone ?? "-"}</p>
-        <p>📧 ${email ?? "-"}</p>
+        <p>📞 ${phone}</p>
+        <p>📧 ${email}</p>
       </div>
       <button 
         onclick="deleteContact(${id})"
-        class="bg-red-700 text-white text-xs px-1 py-0.5 rounded">
+        class="bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 rounded">
         Delete
       </button>
     </li>`;
@@ -92,8 +92,12 @@ function deleteContact(id) {
   renderContacts(contactsList);
 }
 
-function searchContacts(contacts, keyword) {
-  return contacts.filter(c => c.fullName.toLowerCase().includes(keyword));
+function handleSearch(event) {
+  const keyword = event.target.value.toLowerCase();
+  const filtered = contactsList.filter(c =>
+    c.fullName.toLowerCase().includes(keyword)
+  );
+  renderContacts(filtered);
 }
 
 function addContact(contacts, contactData) {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Memora</title>
+    <title>📒 Memora</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="bg-gray-100 min-h-screen flex flex-col items-center py-10">
@@ -12,6 +12,17 @@
       <h1 class="text-3xl font-bold text-gray-800">📒 Memora</h1>
       <p class="text-gray-500 text-sm">Keep your contacts organized easily</p>
     </header>
+
+    <!-- Search -->
+    <div class="w-full max-w-md mb-6">
+      <input
+        id="q"
+        type="text"
+        placeholder="🔍 Search contacts..."
+        class="border rounded-md p-2 w-full"
+        oninput="handleSearch(event)"
+      />
+    </div>
 
     <!-- Form -->
     <section
@@ -24,8 +35,10 @@
           >
           <input
             id="full-name"
+            name="fullName"
             type="text"
             placeholder="Enter full name"
+            required
             class="mt-1 w-full border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
           />
         </div>
@@ -36,8 +49,10 @@
           >
           <input
             id="phone"
+            name="phone"
             type="tel"
             placeholder="e.g. +62-812-9000-1234"
+            required
             class="mt-1 w-full border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
           />
         </div>
@@ -48,8 +63,10 @@
           >
           <input
             id="email"
+            name="email"
             type="email"
             placeholder="example@email.com"
+            required
             class="mt-1 w-full border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
           />
         </div>
@@ -64,10 +81,8 @@
     </section>
 
     <!-- Contact List -->
-    <main id="app" class="max-w-md w-full mt-10 space-y-3">
-      <!-- Contacts will appear here -->
-    </main>
+    <main id="app" class="max-w-md w-full mt-10 space-y-3"></main>
 
-    <script src="/index.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
